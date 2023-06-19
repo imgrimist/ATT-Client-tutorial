@@ -1,5 +1,6 @@
 const { Client: AttClient } = require('att-client');
 const { attConfig } = require('./bot-config');
+const bot = new AttClient(attConfig);
 
 bot.on('connect', async (connection) => {
     
