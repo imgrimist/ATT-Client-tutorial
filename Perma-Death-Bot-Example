@@ -17,6 +17,9 @@ bot.on('connect', async (connection) => {
         if (killedPlayer && killerPlayer) {
             if (cooldownEnable && !cooldown.includes(killerPlayer.id)) {
                 cooldown.push(killerPlayer.id);
+                setTimeout(function() {
+                    cooldown.splice(cooldown.indexOf(killerPlayer.id), 1);
+                }, 86400000);
             } 
             
             if (cooldown.includes(killerPlayer.id)) {
