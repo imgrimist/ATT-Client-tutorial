@@ -1,5 +1,6 @@
 const { Client: AttClient } = require('att-client');
 const { attConfig } = require('./bot-config');
+const bot = new AttClient(attConfig);
 
 bot.on('connect', async (connection) => {
     
@@ -7,7 +8,7 @@ bot.on('connect', async (connection) => {
     connection.subscribe(`ObjectKilled`, message => { 
        
         // Declares the name of the object killed, and the player who killed the object
-        const { killerPlayer, name,  } = message.data;
+        const { killerPlayer, name } = message.data;
         
         // Checks the the name of the object that was killed
         if (name.startsWith('Spriggull')) {
