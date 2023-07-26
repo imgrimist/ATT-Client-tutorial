@@ -12,14 +12,16 @@ const killReward = true;
 bot.on('connect', async (connection) => {
 
     connection.subscribe("PlayerKilled", message => {
-        const {killedPlayer, killerPlayer} = message.data;
+        const {killedPlayer, killerPlayer, source} = message.data;
 
         if (killedPlayer && killerPlayer) {
             if (cooldownEnable && !cooldown.includes(killerPlayer.id)) {
                 cooldown.push(killerPlayer.id);
+                    
                 setTimeout(function() {
                     cooldown.splice(cooldown.indexOf(killerPlayer.id), 1);
                 }, 86400000);
+                    
             } 
             
             if (cooldown.includes(killerPlayer.id)) {
@@ -28,12 +30,16 @@ bot.on('connect', async (connection) => {
             
             if (killReward) {
                 connection.send(`trade post ${killerPlayer.id} GoldCoin 50`);
-                connection.send(`player message ${killedPlayer.id} "50 Coins are now in your mailbox." 3`);
+                connection.send(`player message ${killerPlayer.id} "50 Coins are now in your mailbox." 3`);
             }
-            
+
             setTimeout(function() {
-                connection.send(`bans from-server ${killedPlayer.id} 72 “Sorry, ${killedPlayer.username}...”`);
+                connection.send(`bans from-server ${killedPlayer.id} 999999 “Sorry, ${killedPlayer.username}...”`);
             }, 3000)
+        }
+
+        if (killedPlayer && !killerPlayer && source != "FallDamage") {
+            connection.send(`bans from-server ${killedPlayer.id} 99999 “Sorry, ${killedPlayer.username}...”`);
         }
     })
 })
