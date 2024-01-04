@@ -10,8 +10,8 @@ bot.on('connect', async (connection) => {
         // Declares the name of the object killed, and the player who killed the object
         const { killerPlayer, name } = message.data;
         
-        // Checks the the name of the object that was killed
-        if (name.startsWith('Spriggull')) {
+        // Checks the name of the object that was killed
+        if (name === "Spriggull(Clone)") {
             
             // If the name of the object starts with 'Spriggull', send a message to the player saying they killed a spriggull
             connection.send(`player message ${killerPlayer} "You killed a spriggull!" 3`);
