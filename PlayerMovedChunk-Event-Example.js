@@ -11,7 +11,7 @@ bot.on('connect', async (connection) => {
         const { player, newChunk, oldChunk } = message.data;
         
         // Sees if player enters the Townhall
-        if (newChunk.startsWith(`Townhall Builing`)) {
+        if (newChunk.startsWith(`Townhall Building`)) {
             connection.send(`player message ${player.id} "Welcome to Townhall, ${player.username}!" 4`);
         }
         
